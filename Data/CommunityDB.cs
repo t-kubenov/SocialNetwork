@@ -1,4 +1,4 @@
-﻿namespace SocialNetwork.Data
+﻿namespace SocialNetwork.Areas.Identity.Data
 {
     public class CommunityDB
     {
