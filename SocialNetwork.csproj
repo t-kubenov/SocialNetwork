@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <Compile Remove="Data\ApplicationDbContext.cs" />
+    <Compile Remove="Data\UserDB.cs" />
+    <Compile Remove="Migrations\20220811104101_IdentityInitialCommit.cs" />
+    <Compile Remove="Migrations\20220811104101_IdentityInitialCommit.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
