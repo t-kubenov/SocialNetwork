@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 namespace SocialNetwork.Data
 {
-    [Keyless]
     public class CommunityMemberDB
     {
         public int Id { get; set; }
