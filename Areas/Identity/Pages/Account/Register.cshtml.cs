@@ -84,7 +84,7 @@ namespace SocialNetwork.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Date)]
             [Display(Name = "Date of Birth")]
-            public string DOB { get; set; }
+            public DateTime DOB { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -129,6 +129,11 @@ namespace SocialNetwork.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                // the custom user properties need to be set up manually, apparently
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.DOB = Input.DOB;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
