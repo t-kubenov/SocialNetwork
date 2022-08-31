@@ -1,23 +1,51 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Areas.Identity.Data;
+using SocialNetwork.Data;
+using System;
 namespace SocialNetwork.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult Index()
+        private readonly SocialNetworkContext _context;
+        private readonly UserManager<SocialNetworkUser> _userManager;
+
+        public UserController(SocialNetworkContext context, UserManager<SocialNetworkUser> userManager)
         {
-            return View();
+            _context = context;
+            _userManager = userManager;
         }
 
-        public IActionResult Login()
+
+        [Authorize]
+        public IActionResult Index(string id)
         {
-            return View();
+            if (id == null)
+            {
+                id = _userManager.GetUserId(User);
+            }
+            //var user = _context.Users.Where(x => x.UserName == User.Identity.Name);
+            var user = _context.Users.Where(x => x.Id == id).First();
+            return View(user);
+        }        
+        
+        public IActionResult UserList()
+        {
+            var userList = _context.Users.ToList();
+            return View(userList);
         }
 
-        public IActionResult Signup()
-        {
-            return View();
-        }
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
+
+        //public IActionResult Signup()
+        //{
+        //    return View();
+        //}
 
         public void AddToFriends()
         {

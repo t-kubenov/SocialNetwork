@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<SocialNetwork.Areas.Identity.Data.SocialNetworkUser>;
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-5 mx-auto">
+            @foreach (var user in Model)
+            {
+                var temp = DateTime.Now - user.DOB;
+                var age = temp.Days / 365;
+                var avatarPath = user.AvatarPath == null? "/img/default-avatar.jpg" : user.AvatarPath;
+
+                <div class="card mb-1">
+                    <div class="row my-3 mx-3">
+                        <img src="@avatarPath" class="h-100 col-2" style="object-fit: cover;" />
+                        <a class="h5 col-6" style="text-decoration:none;" asp-controller="User" asp-action="Index" asp-route-id="@user.Id">@user.FirstName @user.LastName, @age</a>
+                        <a class="btn btn-primary btn-sm h-100 col-4">Add to Friends</a>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+
+
+</div>
