@@ -12,7 +12,7 @@ public class SocialNetworkUser : IdentityUser
 {
     [PersonalData]
     [Column(TypeName = "nvarchar(100)")]
-    public string? FirstName { get; set; }
+    public string? FirstName { get; set; } // first and last names shouldn't be null, but i'm afraid fixing this might cause more unnecessary problems later
 
     [PersonalData]
     [Column(TypeName = "nvarchar(100)")]
