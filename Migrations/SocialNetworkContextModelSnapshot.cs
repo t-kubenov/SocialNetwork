@@ -264,7 +264,7 @@ namespace SocialNetwork.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Communities");
+                    b.ToTable("Communities", (string)null);
                 });
 
             modelBuilder.Entity("SocialNetwork.Data.CommunityMemberDB", b =>
@@ -287,7 +287,7 @@ namespace SocialNetwork.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CommunityMembers");
+                    b.ToTable("CommunityMembers", (string)null);
                 });
 
             modelBuilder.Entity("SocialNetwork.Data.FriendsDB", b =>
@@ -316,7 +316,7 @@ namespace SocialNetwork.Migrations
 
                     b.HasIndex("RequesterId");
 
-                    b.ToTable("Friendships");
+                    b.ToTable("Friendships", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

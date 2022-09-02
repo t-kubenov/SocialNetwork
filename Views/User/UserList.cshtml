@@ -17,7 +17,7 @@
                     <div class="row my-3 mx-3">
                         <img src="@avatarPath" class="h-100 col-2" style="object-fit: cover;" />
                         <a class="h5 col-6" style="text-decoration:none;" asp-controller="User" asp-action="Index" asp-route-id="@user.Id">@user.FirstName @user.LastName, @age</a>
-                        <a class="btn btn-primary btn-sm h-100 col-4">Add to Friends</a>
+                        <a class="btn btn-primary btn-sm h-100 col-4" asp-controller="User" asp-action="AddToFriends" asp-route-targetUser="@user.Id" >Add to Friends</a>
                     </div>
                 </div>
 

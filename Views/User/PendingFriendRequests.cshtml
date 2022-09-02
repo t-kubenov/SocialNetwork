@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model List<SocialNetwork.Data.FriendsDB>;
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-5 mx-auto">
+            @if (!Model.Any()){
+                <h2>You have no pending friend requests</h2> // show this message if the model list is empty
+            }
+            @foreach (var request in Model)
+            {
+                var user = request.Requester;
+                <p>@request.Id</p>
+                <p>@request.Requester!!!!</p>
+                <p>@request.Addressee</p>
+                <p>@request.StatusCode</p>
+                if (user != null){
+
+                    var avatarPath = (user.AvatarPath == null) ? "/img/default-avatar.jpg" : user.AvatarPath;
+
+                    <div class="card mb-1">
+                        <div class="row my-3 mx-3">
+                            <img src="@avatarPath" class="h-100 col-2" style="object-fit: cover;" />
+                            <a class="h5 col-6" style="text-decoration:none;" asp-controller="User" asp-action="Index" asp-route-id="@user.Id">@user.FirstName @user.LastName</a>
+                            <a class="btn btn-outline-primary btn-sm h-100 col-4" asp-controller="User" asp-action="AcceptFriendRequest" asp-route-id="@user.Id">Add to Friends</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+
+</div>
