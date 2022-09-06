@@ -47,7 +47,7 @@ namespace SocialNetwork.Controllers
             var target = _userManager.FindByIdAsync(targetUser).Result;
 
             if (_context.Friendships.Where(x => x.Requester == user && x.Addressee == target).SingleOrDefault() == null
-                & user != target)
+                && user != target) // make sure the same friend request does not exist in the table and the user is not sending the request to himself
             {
                 FriendsDB friendsDB = new()
                 {
@@ -65,20 +65,23 @@ namespace SocialNetwork.Controllers
         public IActionResult PendingFriendRequests()
         {
             var user = _userManager.FindByIdAsync(_userManager.GetUserId(User)).Result;
-            var ugh = _context.Friendships.Where(x => x.Addressee == user && x.StatusCode == 0);
-            var requestList = _context.Friendships.Where(x => x.Addressee == user && x.StatusCode == 0).ToList();
+            var requestList = _context.Friendships.Where(x => x.Addressee == user && x.StatusCode == 0).Select(x => new {x.Id, x.Requester, x.DateInitiated}).ToList();
+            // for some reason, passing the data as type friendsDB does not include the requester, so I had to filter the data with the select query.
+
             return View(requestList);
         }
 
 
-        public void AcceptFriendRequest(int id)
+        public string AcceptFriendRequest(int id)
         {
-            var query = _context.Friendships.Where(x => x.Id == id).SingleOrDefault();
-            if (query != null && _userManager.GetUserId(User) == query.Addressee.Id)
+            var query = _context.Friendships.Where(x => x.Id == id).Select(x => x.Addressee).SingleOrDefault();
+            if (query != null && query == _userManager.FindByIdAsync(_userManager.GetUserId(User)).Result) // make sure the appropriate user is accepting the request
             {
                 _context.Friendships.Where(x => x.Id == id).Single().StatusCode = 1;
                 _context.SaveChanges();
+                return "based";
             }
+            return "cringe";
         }
 
 
