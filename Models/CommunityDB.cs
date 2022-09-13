@@ -1,6 +1,6 @@
 ﻿using SocialNetwork.Areas.Identity.Data;
 
-namespace SocialNetwork.Data
+namespace SocialNetwork.Models
 {
     public class CommunityDB
     {

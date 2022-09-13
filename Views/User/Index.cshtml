@@ -1,6 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
 @using System.Globalization;
 
 @model SocialNetwork.Areas.Identity.Data.SocialNetworkUser;
@@ -8,20 +9,21 @@
     CultureInfo culture = new("en-US");
     var temp = DateTime.Now - Model.DOB;
     var age = temp.Days / 365;
+    var avatarPath = Model.AvatarPath == null ? "/img/default-avatar.jpg" : Model.AvatarPath;
 }
 
 <div class="container">
     <div class="row">
         <div class="col-4">
             <div class="card h-100">
-                <img src="~/img/default-avatar.jpg" style="object-fit: cover;" class="h-100" />
+                <img src="@avatarPath" style="object-fit: cover;" class="h-100" />
             </div>
-            <h6 class="text-center mt-3">Friends</h6>
         </div>
         <div class="col-8">
             <h1>@Model.FirstName @Model.LastName</h1>
             @*<p>Born on @Model.DOB.ToString("MMMM d, yyyy", culture)</p>*@
             <p>@age years old</p>
+            <a class="text-center h6" asp-controller="User" asp-action="FriendsList" asp-route-id=@Model.Id>@Model.FirstName's Friends</a>
         </div>
     </div>
 </div>

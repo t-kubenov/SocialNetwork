@@ -13,11 +13,7 @@
             }
             @foreach (var request in Model)
             {
-                var user = request.Requester;@*
-                <p>@request.Id</p>
-                <p>@request.Requester!!!!</p>
-                <p>@request.Addressee</p>
-                <p>@request.StatusCode</p>*@
+                var user = request.Requester;
                 if (user != null){
 
                     var avatarPath = (user.AvatarPath == null) ? "/img/default-avatar.jpg" : user.AvatarPath;

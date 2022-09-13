@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Areas.Identity.Data;
 
-namespace SocialNetwork.Data
+namespace SocialNetwork.Models
 {
     public class CommunityMemberDB
     {

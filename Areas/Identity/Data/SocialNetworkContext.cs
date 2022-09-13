@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Areas.Identity.Data;
+using SocialNetwork.Models;
 
 namespace SocialNetwork.Data;
 
